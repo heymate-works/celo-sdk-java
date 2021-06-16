@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.web3j.crypto.Credentials;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.Web3jService;
+import org.web3j.protocol.core.JsonRpc2_0Web3j;
 import org.web3j.protocol.core.methods.response.EthEstimateGas;
 import org.web3j.protocol.core.methods.response.EthSendTransaction;
 
@@ -47,7 +48,7 @@ public class ContractKit {
     }
 
     public static ContractKit build(Web3jService web3jService) {
-        return new ContractKit(Web3j.build(web3jService));
+        return new ContractKit(new JsonRpc2_0Web3j(web3jService));
     }
 
     public void setFeeCurrency(CeloContract token) {

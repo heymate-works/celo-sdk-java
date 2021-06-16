@@ -201,7 +201,18 @@ public class GovernanceWrapper extends BaseWrapper<Governance> {
     public static ProposalParams proposalToParams(Proposal proposal, String description) {
         List<Transaction> transactions = proposal.transactions;
 
-        List<byte[]> arrays = transactions.stream().map(transaction -> transaction.data).collect(Collectors.toList());
+        List<byte[]> arrays = new ArrayList<>(transactions.size());
+        List<BigInteger> values = new ArrayList<>(transactions.size());
+        List<String> tos = new ArrayList<>(transactions.size());
+        List<BigInteger> lengths = new ArrayList<>(transactions.size());
+
+        for (Transaction transaction: transactions) {
+            arrays.add(transaction.data);
+            values.add(transaction.value);
+            tos.add(transaction.to);
+            lengths.add(BigInteger.valueOf(transaction.data.length));
+        }
+
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
         for (final byte[] array : arrays) {
             if (array != null) {
@@ -210,10 +221,10 @@ public class GovernanceWrapper extends BaseWrapper<Governance> {
         }
 
         return new ProposalParams(
-                transactions.stream().map(transaction -> transaction.value).collect(Collectors.toList()),
-                transactions.stream().map(transaction -> transaction.to).collect(Collectors.toList()),
+                values,
+                tos,
                 out.toByteArray(),
-                arrays.stream().map(array -> BigInteger.valueOf(array.length)).collect(Collectors.toList()),
+                lengths,
                 description
         );
     }
@@ -221,19 +232,19 @@ public class GovernanceWrapper extends BaseWrapper<Governance> {
     public Proposal getProposal(BigInteger proposalID) throws Exception {
         ProposalMetadata metadata = this.getProposalMetadata(proposalID);
 
-        List<Transaction> transactions = IntStream.range(0, metadata.transactionCount).mapToObj((idx) -> {
+        List<Transaction> transactions = new ArrayList<>(metadata.transactionCount);
+
+        for (int idx = 0; idx < metadata.transactionCount; idx++) {
             try {
                 Tuple3<BigInteger, String, byte[]> transaction = this.getProposalTransaction(proposalID, BigInteger.valueOf(idx)).send();
-                return new Transaction(
+                transactions.add(new Transaction(
                         transaction.component1(),
                         transaction.component2(),
                         transaction.component3(),
                         "to",
-                        "input");
-            } catch (Exception e) {
-                return null;
-            }
-        }).filter(Objects::nonNull).collect(Collectors.toList());
+                        "input"));
+            } catch (Exception e) { }
+        }
 
         return new Proposal(transactions);
     }

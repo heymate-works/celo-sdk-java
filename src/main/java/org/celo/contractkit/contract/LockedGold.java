@@ -694,9 +694,11 @@ public class LockedGold extends Contract {
                     @Override
                     public Tuple2<List<BigInteger>, List<BigInteger>> call() throws Exception {
                         List<Type> results = executeCallMultipleValueReturn(function);
-                        return new Tuple2<List<BigInteger>, List<BigInteger>>(
-                                convertToNative((List<Uint256>) results.get(0).getValue()), 
-                                convertToNative((List<Uint256>) results.get(1).getValue()));
+                        List<BigInteger> result0 = convertToNative((List<Uint256>) results.get(0).getValue());
+                        List<BigInteger> result1 = convertToNative((List<Uint256>) results.get(1).getValue());
+                        return new Tuple2<>(
+                                result0,
+                                result1);
                     }
                 });
     }

@@ -11,6 +11,7 @@ import org.web3j.tuples.generated.Tuple2;
 import org.web3j.tuples.generated.Tuple4;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -230,12 +231,16 @@ public class ReserveWrapper extends BaseWrapper<Reserve> {
     }
 
     public List<String> getSpenders(TransactionReceipt transactionReceipt) {
-        List<String> spendersAdded =
-                contract.getSpenderAddedEvents(transactionReceipt).stream().map(event -> event.spender).collect(Collectors.toList());
+        List<String> spendersAdded = new ArrayList<>();
 
-        List<String> spendersRemoved =
-                contract.getSpenderRemovedEvents(transactionReceipt).stream().map(event -> event.spender).collect(Collectors.toList());
+        for (Reserve.SpenderAddedEventResponse event: contract.getSpenderAddedEvents(transactionReceipt)) {
+            spendersAdded.add(event.spender);
+        }
 
-        return spendersAdded.stream().filter((o) -> !spendersRemoved.contains(o)).collect(Collectors.toList());
+        for (Reserve.SpenderRemovedEventResponse event: contract.getSpenderRemovedEvents(transactionReceipt)) {
+            spendersAdded.remove(event.spender);
+        }
+
+        return spendersAdded;
     }
 }

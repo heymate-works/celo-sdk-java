@@ -559,10 +559,13 @@ public class SortedOracles extends Contract {
                     @Override
                     public Tuple3<List<String>, List<BigInteger>, List<BigInteger>> call() throws Exception {
                         List<Type> results = executeCallMultipleValueReturn(function);
-                        return new Tuple3<List<String>, List<BigInteger>, List<BigInteger>>(
-                                convertToNative((List<Address>) results.get(0).getValue()), 
-                                convertToNative((List<Uint256>) results.get(1).getValue()), 
-                                convertToNative((List<Uint8>) results.get(2).getValue()));
+                        List<String> result0 = convertToNative((List<Address>) results.get(0).getValue());
+                        List<BigInteger> result1 = convertToNative((List<Uint256>) results.get(1).getValue());
+                        List<BigInteger> result2 = convertToNative((List<Uint8>) results.get(2).getValue());
+                        return new Tuple3<>(
+                                result0,
+                                result1,
+                                result2);
                     }
                 });
     }
@@ -590,10 +593,13 @@ public class SortedOracles extends Contract {
                     @Override
                     public Tuple3<List<String>, List<BigInteger>, List<BigInteger>> call() throws Exception {
                         List<Type> results = executeCallMultipleValueReturn(function);
-                        return new Tuple3<List<String>, List<BigInteger>, List<BigInteger>>(
-                                convertToNative((List<Address>) results.get(0).getValue()), 
-                                convertToNative((List<Uint256>) results.get(1).getValue()), 
-                                convertToNative((List<Uint8>) results.get(2).getValue()));
+                        List<String> result0 = convertToNative((List<Address>) results.get(0).getValue());
+                        List<BigInteger> result1 = convertToNative((List<Uint256>) results.get(1).getValue());
+                        List<BigInteger> result2 = convertToNative((List<Uint8>) results.get(2).getValue());
+                        return new Tuple3<>(
+                                result0,
+                                result1,
+                                result2);
                     }
                 });
     }

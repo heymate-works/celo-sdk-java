@@ -1446,9 +1446,11 @@ public class Validators extends Contract {
                     @Override
                     public Tuple4<List<BigInteger>, List<String>, BigInteger, BigInteger> call() throws Exception {
                         List<Type> results = executeCallMultipleValueReturn(function);
-                        return new Tuple4<List<BigInteger>, List<String>, BigInteger, BigInteger>(
-                                convertToNative((List<Uint256>) results.get(0).getValue()), 
-                                convertToNative((List<Address>) results.get(1).getValue()), 
+                        List<BigInteger> result0 = convertToNative((List<Uint256>) results.get(0).getValue());
+                        List<String> result1 = convertToNative((List<Address>) results.get(1).getValue());
+                        return new Tuple4<>(
+                                result0,
+                                result1,
                                 (BigInteger) results.get(2).getValue(), 
                                 (BigInteger) results.get(3).getValue());
                     }
@@ -1661,12 +1663,14 @@ public class Validators extends Contract {
                     @Override
                     public Tuple7<List<String>, BigInteger, BigInteger, BigInteger, List<BigInteger>, BigInteger, BigInteger> call() throws Exception {
                         List<Type> results = executeCallMultipleValueReturn(function);
-                        return new Tuple7<List<String>, BigInteger, BigInteger, BigInteger, List<BigInteger>, BigInteger, BigInteger>(
-                                convertToNative((List<Address>) results.get(0).getValue()), 
+                        List<String> result0 = convertToNative((List<Address>) results.get(0).getValue());
+                        List<BigInteger> result4 = convertToNative((List<Uint256>) results.get(4).getValue());
+                        return new Tuple7<>(
+                                result0,
                                 (BigInteger) results.get(1).getValue(), 
                                 (BigInteger) results.get(2).getValue(), 
                                 (BigInteger) results.get(3).getValue(), 
-                                convertToNative((List<Uint256>) results.get(4).getValue()), 
+                                result4,
                                 (BigInteger) results.get(5).getValue(), 
                                 (BigInteger) results.get(6).getValue());
                     }

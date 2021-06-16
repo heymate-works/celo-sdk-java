@@ -982,11 +982,15 @@ public class Attestations extends Contract {
                     @Override
                     public Tuple4<List<BigInteger>, List<String>, List<BigInteger>, List<BigInteger>> call() throws Exception {
                         List<Type> results = executeCallMultipleValueReturn(function);
-                        return new Tuple4<List<BigInteger>, List<String>, List<BigInteger>, List<BigInteger>>(
-                                convertToNative((List<Uint256>) results.get(0).getValue()), 
-                                convertToNative((List<Address>) results.get(1).getValue()), 
-                                convertToNative((List<Uint64>) results.get(2).getValue()), 
-                                convertToNative((List<Uint64>) results.get(3).getValue()));
+                        List<BigInteger> result0 = convertToNative((List<Uint256>) results.get(0).getValue());
+                        List<String> result1 = convertToNative((List<Address>) results.get(1).getValue());
+                        List<BigInteger> result2 = convertToNative((List<Uint64>) results.get(2).getValue());
+                        List<BigInteger> result3 = convertToNative((List<Uint64>) results.get(3).getValue());
+                        return new Tuple4<>(
+                                result0,
+                                result1,
+                                result2,
+                                result3);
                     }
                 });
     }
@@ -1020,10 +1024,13 @@ public class Attestations extends Contract {
                     @Override
                     public Tuple4<List<BigInteger>, List<String>, List<BigInteger>, byte[]> call() throws Exception {
                         List<Type> results = executeCallMultipleValueReturn(function);
-                        return new Tuple4<List<BigInteger>, List<String>, List<BigInteger>, byte[]>(
-                                convertToNative((List<Uint32>) results.get(0).getValue()), 
-                                convertToNative((List<Address>) results.get(1).getValue()), 
-                                convertToNative((List<Uint256>) results.get(2).getValue()), 
+                        List<BigInteger> results0 = convertToNative((List<Uint32>) results.get(0).getValue());
+                        List<String> results1 = convertToNative((List<Address>) results.get(1).getValue());
+                        List<BigInteger> results2 = convertToNative((List<Uint256>) results.get(2).getValue());
+                        return new Tuple4<>(
+                                results0,
+                                results1,
+                                results2,
                                 (byte[]) results.get(3).getValue());
                     }
                 });

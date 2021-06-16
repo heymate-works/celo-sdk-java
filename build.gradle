@@ -79,7 +79,7 @@ bintray {
 
 dependencies {
     api 'org.apache.commons:commons-math3:3.6.1',
-            'org.web3j:core:4.6.3'
+            'org.web3j:core:4.6.0-android'
 
     implementation 'com.google.guava:guava:29.0-jre',
             'ch.qos.logback:logback-classic:1.2.3'
