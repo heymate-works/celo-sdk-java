@@ -27,6 +27,11 @@ def pomConfig = {
             name "Kirill Talaluev"
             email "k@talaluev.me"
         }
+        developer {
+            id "yasharpm"
+            name "Yashar Pourmohamad"
+            email "yasharpm@gmail.com"
+        }
     }
 
     scm {

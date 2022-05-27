@@ -13,7 +13,7 @@ import org.web3j.tuples.generated.Tuple4;
 import java.math.BigInteger;
 import java.util.List;
 
-public class StableTokenWrapper extends BaseWrapper<StableToken> {
+public class StableTokenWrapper extends BaseWrapper<StableToken> implements ICeloTokenWrapper {
 
     public StableTokenWrapper(StableToken contract, Web3j web3j, CeloTransactionManager transactionManager, CeloGasProvider gasProvider) {
         super(contract, web3j, transactionManager, gasProvider);

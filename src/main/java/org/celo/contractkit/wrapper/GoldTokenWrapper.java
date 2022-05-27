@@ -13,7 +13,7 @@ import org.web3j.protocol.core.methods.response.TransactionReceipt;
 import java.io.IOException;
 import java.math.BigInteger;
 
-public class GoldTokenWrapper extends BaseWrapper<GoldToken> {
+public class GoldTokenWrapper extends BaseWrapper<GoldToken> implements ICeloTokenWrapper {
 
     public GoldTokenWrapper(GoldToken contract, Web3j web3j, CeloTransactionManager transactionManager, CeloGasProvider gasProvider) {
         super(contract, web3j, transactionManager, gasProvider);

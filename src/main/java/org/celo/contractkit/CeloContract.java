@@ -10,6 +10,8 @@ public enum CeloContract {
     EpochRewards,
     Escrow,
     Exchange,
+    ExchangeEUR,
+    ExchangeBRL,
     FeeCurrencyWhitelist,
     Freezer,
     GasPriceMinimum,
@@ -22,6 +24,8 @@ public enum CeloContract {
     Reserve,
     SortedOracles,
     StableToken,
+    StableTokenEUR,
+    StableTokenBRL,
     TransferWhitelist,
     Validators,
 }

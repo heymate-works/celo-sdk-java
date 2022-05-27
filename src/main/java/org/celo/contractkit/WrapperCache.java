@@ -109,6 +109,28 @@ public class WrapperCache {
         }
     }
 
+    public ExchangeWrapper getExchangeEUR() {
+        if (cache.containsKey(CeloContract.ExchangeEUR)) {
+            return (ExchangeWrapper) cache.get(CeloContract.ExchangeEUR);
+        } else {
+            String contractAddress = addressRegistry.addressFor(CeloContract.ExchangeEUR);
+            ExchangeWrapper wrapper = ExchangeWrapper.load(contractAddress, web3j, transactionManager, gasProvider);
+            cache.put(CeloContract.ExchangeEUR, wrapper);
+            return wrapper;
+        }
+    }
+
+    public ExchangeWrapper getExchangeBRL() {
+        if (cache.containsKey(CeloContract.ExchangeBRL)) {
+            return (ExchangeWrapper) cache.get(CeloContract.ExchangeBRL);
+        } else {
+            String contractAddress = addressRegistry.addressFor(CeloContract.ExchangeBRL);
+            ExchangeWrapper wrapper = ExchangeWrapper.load(contractAddress, web3j, transactionManager, gasProvider);
+            cache.put(CeloContract.ExchangeBRL, wrapper);
+            return wrapper;
+        }
+    }
+
     public GasPriceMinimumWrapper getGasPriceMinimum() {
         if (cache.containsKey(CeloContract.GasPriceMinimum)) {
             return (GasPriceMinimumWrapper) cache.get(CeloContract.GasPriceMinimum);
@@ -193,6 +215,28 @@ public class WrapperCache {
             String contractAddress = addressRegistry.addressFor(CeloContract.StableToken);
             StableTokenWrapper wrapper = StableTokenWrapper.load(contractAddress, web3j, transactionManager, gasProvider);
             cache.put(CeloContract.StableToken, wrapper);
+            return wrapper;
+        }
+    }
+
+    public StableTokenWrapper getStableTokenEUR() {
+        if (cache.containsKey(CeloContract.StableTokenEUR)) {
+            return (StableTokenWrapper) cache.get(CeloContract.StableTokenEUR);
+        } else {
+            String contractAddress = addressRegistry.addressFor(CeloContract.StableTokenEUR);
+            StableTokenWrapper wrapper = StableTokenWrapper.load(contractAddress, web3j, transactionManager, gasProvider);
+            cache.put(CeloContract.StableTokenEUR, wrapper);
+            return wrapper;
+        }
+    }
+
+    public StableTokenWrapper getStableTokenBRL() {
+        if (cache.containsKey(CeloContract.StableTokenBRL)) {
+            return (StableTokenWrapper) cache.get(CeloContract.StableTokenBRL);
+        } else {
+            String contractAddress = addressRegistry.addressFor(CeloContract.StableTokenBRL);
+            StableTokenWrapper wrapper = StableTokenWrapper.load(contractAddress, web3j, transactionManager, gasProvider);
+            cache.put(CeloContract.StableTokenBRL, wrapper);
             return wrapper;
         }
     }
